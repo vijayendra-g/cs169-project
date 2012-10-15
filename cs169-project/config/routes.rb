@@ -1,4 +1,6 @@
 Cs169Project::Application.routes.draw do
+  get "notlogged/default"
+  match '(*foo)' => 'notlogged#default'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
