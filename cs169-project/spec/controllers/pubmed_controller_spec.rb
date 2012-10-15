@@ -4,7 +4,7 @@ describe PubmedController do
 
   describe 'search a term in pubmed' do
     before :each do
-	@fake_results = "a list of articles written by pedro"
+	@fake_results = "[article1 by pedro, article2 by pedro]"
     end
     it 'should call the model method that performs pubMed search' 
 	Pubmed.should_receive(:find_in_pubmed).with( {:author => 'pedro'}).and_return(@fake_results)
@@ -22,6 +22,5 @@ describe PubmedController do
 	  assign(:articles).should == @fake_results
 	end
     end
-
   end
-
+end
