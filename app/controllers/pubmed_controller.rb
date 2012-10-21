@@ -11,4 +11,8 @@ class PubmedController < ApplicationController
     render 'mesh'
   end
 
+  def results
+    render 'results'
+  end
+
 end
