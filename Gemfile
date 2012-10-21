@@ -42,3 +42,5 @@ gem 'jquery-rails'
 # To use debugger
 gem 'haml'
 
+gem "libxml-ruby"
+gem "pubmed_search", "~> 0.4.0"

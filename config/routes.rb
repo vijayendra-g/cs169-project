@@ -1,6 +1,9 @@
 Cs169Project::Application.routes.draw do
-  get "notlogged/default"
-  match '(*foo)' => 'notlogged#default'
+  post "/search" => 'pubmed#search'
+
+  match '/search/mesh' => 'pubmed#mesh'
+
+  root :to => 'pubmed#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
