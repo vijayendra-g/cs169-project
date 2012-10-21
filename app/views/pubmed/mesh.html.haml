@@ -1,0 +1,14 @@
+%h1 Choose Mesh Terms
+%h4 Select one or more Mesh Terms in order to narrow down your search.
+
+=form_tag '/search/mesh' do
+  =label :major_topic, :major_topic, 'MeSH Major Topic:'
+  =text_field '', 'major_topic'
+
+  =label :subheading, :subheading, 'MeSH Subheading:'
+  =text_field '', 'subheading'
+
+  =label :terms, :terms, 'MeSH Terms:'
+  =text_field '', 'terms'
+
+  =submit_tag 'Filter'
