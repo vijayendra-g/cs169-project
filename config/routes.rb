@@ -1,6 +1,8 @@
 Cs169Project::Application.routes.draw do
   post "/search" => 'pubmed#search'
 
+  match '/search/mesh' => 'pubmed#mesh'
+
   root :to => 'pubmed#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
