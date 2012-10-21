@@ -1,8 +1,0 @@
-%h1 Search PubMed's database
-=form_tag '/search', :method => :post do
-
-  = label :search_label, :search_label, 'Input your search term:'
-  = text_field '', 'search_term'
-
-  = submit_tag 'Search!'
-
