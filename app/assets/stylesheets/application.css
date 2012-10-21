@@ -3,5 +3,24 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
- *= require_tree . 
+ *= require_tree .
 */
+
+body{
+  position: relative;
+  background-color: #ffffff;
+  background-image: url(background.png), url(top.png), url(logo.png);
+  background-repeat: repeat-x, repeat-x, no-repeat;
+  background-size: 5px 85px, 161px 15px, 205px 75px;
+  min-height: 500px;
+  min-width: 800px;
+  background-position: bottom, top, 10px 13px;
+  font-size: 100%;
+  font-family: Helvetica, Arial, 'Sans Serif';
+  color: #4f4f4f;
+  margin-top: 90px;
+  margin-bottom: 20px;
+  margin-right:220px;
+  margin-left: 220px;
+  text-align: center;
+}

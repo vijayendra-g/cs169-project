@@ -1,0 +1,16 @@
+{
+  "Cucumber Features": {
+    "coverage": {
+      "/home/ubuntu/project/cs169-project/cs169-project/app/controllers/application_controller.rb": [
+        1,
+        1,
+        null
+      ],
+      "/home/ubuntu/project/cs169-project/cs169-project/app/helpers/application_helper.rb": [
+        1,
+        null
+      ]
+    },
+    "timestamp": 1350259246
+  }
+}
