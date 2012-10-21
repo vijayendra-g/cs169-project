@@ -1,14 +1,14 @@
 class PubmedController < ApplicationController
+  include PubmedHelper
   def index
     render 'search'
   end
 
   def search
-    @results = PubmedSearch.search(params[:search_term])
-    @pmids = @results.pmids
-    puts @pmids.length
-    puts @pmids[1]
-    render 'mesh'
+    search_results = PubmedSearch.search(params[:search_term])
+    @articleIDList = search_results.pmids
+    @results = ArticleXMLParser.new(@articleIDList) #names should be changed
+
   end
 
   def results
@@ -16,3 +16,5 @@ class PubmedController < ApplicationController
   end
 
 end
+
+

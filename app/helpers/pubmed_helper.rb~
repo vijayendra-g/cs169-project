@@ -1,3 +1,6 @@
+module PubmedHelper
+
+
 #Goal of parser: Given an array of article numbers, return an iterator of article information gained from XML
 #Number of articles is temporarily capped at 100
 require 'nokogiri'
@@ -58,8 +61,9 @@ class ArticleXMLParser
 end
 
 
-
 def parse_search
   #view should iterate through this?
-  @results = ArticleXMLParser.new(@articleIDList) #names should be changed
+
+end
+
 end
