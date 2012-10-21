@@ -8,6 +8,7 @@ class PubmedController < ApplicationController
     @pmids = @results.pmids
     puts @pmids.length
     puts @pmids[1]
+    render 'mesh'
   end
 
 end
