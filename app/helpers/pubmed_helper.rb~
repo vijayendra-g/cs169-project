@@ -9,7 +9,7 @@ module PubmedHelper
   class ArticleContainer
 
     #authors is a list of strings
-    attr_accessor :authors, :title, :abstract, :date, :affiliation
+    attr_accessor :authors, :title, :abstract, :date, :affiliation, :id
 
     def initialize
       @authors = []
@@ -53,7 +53,7 @@ module PubmedHelper
       cont.affiliation = doc.xpath("//Affiliation")[0].to_s.split(tagr)[1]
       cont.id = articleNum
       dsplit = doc.xpath("//PubDate")[0].to_s.split(tagr)
-      cont.date = dsplit[2] + ' ' + dsplit[4] + ' ' + dsplit[6]
+      cont.date = dsplit[2].to_s + ' ' + dsplit[4].to_s + ' ' + dsplit[6].to_s
       return cont
     end
 
