@@ -9,7 +9,7 @@ module PubmedHelper
   class ArticleContainer
 
     #authors is a list of strings
-    attr_accessor :authors, :title, :abstract, :date, :affiliation
+    attr_accessor :authors, :title, :abstract, :date, :affiliation, :id
 
     def initialize
       @authors = []
@@ -42,16 +42,17 @@ module PubmedHelper
       #return that data structure
       tagr = /<[^<>]*>/
       cont = ArticleContainer.new
-      doc = Nokogiri::XML(open('http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=' + articleNum + '&retmode=xml'))
+      doc = Nokogiri::XML(open('http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=' + articleNum.to_s + '&retmode=xml'))
       #use doc.xpath for stuff
       doc.xpath("//Author").each do |a|
-        asplit = a.split(tagr)
+        asplit = a.to_s.split(tagr)
         cont.authors << asplit[2] + ' ' + asplit[6] #lastname space initials
       end
-      cont.title = doc.xpath("//ArticleTitle")[0].split(tagr)[1]
-      cont.abstract = doc.xpath("//AbstractText")[0].split(tagr)[1]
-      cont.affiliation = doc.xpath("//Affiliation")[0].split(tagr)[1]
-      dsplit = doc.xpath("//PubDate")[0].split(tagr)
+      cont.title = doc.xpath("//ArticleTitle")[0].to_s.split(tagr)[1]
+      cont.abstract = doc.xpath("//AbstractText")[0].to_s.split(tagr)[1]
+      cont.affiliation = doc.xpath("//Affiliation")[0].to_s.split(tagr)[1]
+      cont.id = articleNum
+      dsplit = doc.xpath("//PubDate")[0].to_s.split(tagr)
       cont.date = dsplit[2] + ' ' + dsplit[4] + ' ' + dsplit[6]
       return cont
     end
