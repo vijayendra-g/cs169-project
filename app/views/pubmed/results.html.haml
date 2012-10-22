@@ -1,12 +1,30 @@
 =form_tag '/search', :method => :post do
-  
-  =label :search_label, :search_label, 'Input your search term:'
-  =text_field '', 'search_term'
 
-  =submit_tag 'Search!'
+  = label :search_label, :search_label, 'Input your search term:'
+  = text_field '', :search_term
+  %br
+  %br
+  = label :mesh_major_topic, :mesh_major_topic, 'Input MeSH major topic:'
+  = text_field '', :major_topic
+  %br
+  %br
+  = label :mesh_subheading, :mesh_subheading, 'Input MeSH subheading:'
+  = text_field '', :subheading
+  %br
+  %br
+  = label :mesh_terms, :mesh_terms, 'Input MeSH terms:'
+  = text_field '', :terms
+  %br
+  %br
+  = submit_tag 'Search!'
 
-=@results.each do |result|
+%br
+%br
+
+=@results.each_with_index do |result, i|
+  -break if i == 10
   =link_to result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
   =result.date
   =result.abstract
+  %br
   
