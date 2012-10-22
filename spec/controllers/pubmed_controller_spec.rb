@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe PubmedController do
-    
+describe PubmedController do   
 =begin
   describe 'search a term in pubmed' do
     before :each do
