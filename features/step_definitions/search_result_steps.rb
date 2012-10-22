@@ -24,3 +24,10 @@ end
 Then /^there should be no results$/ do
   assert !results.any?
 end
+
+#for search_term_in_title_of_all_results.feature
+Then /^there should be "(\d)" results$/ do |num|
+  assert results.count == num
+end
+
+
