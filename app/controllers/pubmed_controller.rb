@@ -14,6 +14,10 @@ class PubmedController < ApplicationController
 
   end
 
+  def results
+    render 'results'
+  end
+
 end
 
 

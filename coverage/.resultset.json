@@ -1,16 +1,111 @@
 {
   "Cucumber Features": {
     "coverage": {
-      "/home/ubuntu/project/cs169-project/cs169-project/app/controllers/application_controller.rb": [
+      "/Users/Soumya/College/Sophomore/CS169/cs169-project/app/controllers/application_controller.rb": [
         1,
         1,
         null
       ],
-      "/home/ubuntu/project/cs169-project/cs169-project/app/helpers/application_helper.rb": [
+      "/Users/Soumya/College/Sophomore/CS169/cs169-project/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/Soumya/College/Sophomore/CS169/cs169-project/app/helpers/notlogged_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/Soumya/College/Sophomore/CS169/cs169-project/app/helpers/pubmed_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/Soumya/College/Sophomore/CS169/cs169-project/app/controllers/parse_controller.rb": [
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        0,
+        null
+      ],
+      "/Users/Soumya/College/Sophomore/CS169/cs169-project/app/controllers/pubmed_controller.rb": [
+        1,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/Soumya/College/Sophomore/CS169/cs169-project/app/models/user.rb": [
         1,
         null
       ]
     },
-    "timestamp": 1350259246
+    "timestamp": 1350855099
   }
 }
