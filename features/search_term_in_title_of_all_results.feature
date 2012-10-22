@@ -5,12 +5,12 @@ Feature: search a medical term in Drufus
   I want to search for a medical term in Drufus database 
 
 Background: existing settings
+  Given I am on the home page of "Drufus"
 
 Scenario: search term (happy path)
-  Given I am on the home page of "Drufus"
-  When I fill in "Search Term" with "bullshit"
+  When I fill in "_search_term" with "bullshit"
   And I press "Search"
-  Then there should be 2 results
+  Then I should see "bullshit"
 
 #Scenario: search term in title (happy path)
 #  Given I am on the home page of "Drufus"
