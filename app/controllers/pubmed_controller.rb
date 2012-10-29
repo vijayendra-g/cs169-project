@@ -6,7 +6,7 @@ class PubmedController < ApplicationController
   end
 
   def search
-    connector = "OR"
+    connector = "AND"
     medical_field = "Anesthesia"
     if params[:major_topic] != nil && params[:major_topic] != ""
       search_query = "#{params[:major_topic]}[MeSH Major Topic]"
@@ -26,6 +26,10 @@ class PubmedController < ApplicationController
     else
       search_query = "Anesthesia[MeSH Terms]"
     end
+    session[:subheading] = params[:subheading]
+    session[:terms] = params[:terms]
+    session[:search_term] = params[:search_term]
+    session[:major_topic] = params[:major_topic]
     #search_query = "((((#{params[:major_topic]}[Mesh Major Topic]) OR #{params[:subheading]}[MeSH Subheading]) OR #{params[:terms]}[MeSH Terms])) OR Anesthesia[Mesh Terms]) OR #{params[:search_term]}"
     puts search_query
     search_results = PubmedSearch.search(search_query)
