@@ -1,4 +1,4 @@
-# Function not implemented yet
+# Functionality not implemented yet
 #Feature: search a medical term in Drufus
 #
 #  As a doctor
