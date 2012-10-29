@@ -34,7 +34,9 @@ module PubmedHelper
       end
     end
 
-
+    def count
+      @arr.count
+    end
 
     def parse(articleNum)
       #get xml from articleNum
