@@ -21,10 +21,11 @@
 %br
 %br
 
-=@results.each_with_index do |result, i|
-  -break if i == 10
-  =link_to result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
-  =result.date
-  =result.abstract
-  %br
+-if @results.count != 0
+  =@results.each_with_index do |result, i|
+    =link_to result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
+    =result.date
+    =result.abstract
+    %br
+    -break if i == 10 or i == @results.count-1
   
