@@ -33,12 +33,11 @@ class PubmedController < ApplicationController
       search_query = "((" + search_query + ") " + connector + " Anesthesia[MeSH Terms]) " + connector + " #{params[:search_term]}"
     elsif search_query == nil && params[:search_term] != nil && params[:search_term] != ""
       search_query = "(Anesthesia[MeSH Terms]) " + connector + " #{params[:search_term]}"
-    elsif search_query != nil && params[:search_term] == nil || params[:search_term] == ""
+    elsif search_query != nil && (params[:search_term] == nil || params[:search_term] == "")
       search_query = "(" + search_query + ") " + connector + " Anesthesia[MeSH Terms]"
     else
       search_query = "Anesthesia[MeSH Terms]"
     end
-
     puts "Search query is " + search_query
     search_results = PubmedSearch.search(search_query)
     @articleIDList = search_results.pmids
