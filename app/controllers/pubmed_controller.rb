@@ -10,14 +10,7 @@ class PubmedController < ApplicationController
     puts search_query
     search_results = PubmedSearch.search(params[:search_term])
     @articleIDList = search_results.pmids
-    @results = ArticleXMLParser.new(@articleIDList) #names should be changed
-    @results.each do |result|
-	puts "Abstract:     " + result.abstract.to_s
-	puts "Title:        " + result.title.to_s
-	puts "Id:           " + result.id.to_s
-	puts "Date:         " + result.date.to_s
-	break
-    end
+    @results = ArticleXMLParser.new(@articleIDList)
     render 'results'
   end
 

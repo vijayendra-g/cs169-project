@@ -59,7 +59,11 @@ module PubmedHelper
       return cont
     end
 
-    
+
+    def retrieve100(articleArray)
+      
+      doc = Nokogiri::XML(open('http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=' + articleNum.to_s + '&retmode=xml'))
+    end
 
   end
 
