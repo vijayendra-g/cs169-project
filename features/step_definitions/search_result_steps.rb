@@ -29,5 +29,3 @@ end
 Then /^there should be "(\d)" results$/ do |num|
   assert results.count == num
 end
-
-
