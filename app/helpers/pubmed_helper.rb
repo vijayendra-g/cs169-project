@@ -47,8 +47,12 @@ module PubmedHelper
       doc = Nokogiri::XML(open('http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=' + articleNum.to_s + '&retmode=xml'))
       #use doc.xpath for stuff
       doc.xpath("//Author").each do |a|
-        asplit = a.to_s.split(tagr)
-        cont.authors << asplit[2] + ' ' + asplit[6] #lastname space initials
+        if(a != nil && a != "")
+          asplit = a.to_s.split(tagr)
+        end
+        if(asplit[2] != nil && asplit[6] != nil)
+          cont.authors << asplit[2] + ' ' + asplit[6] #lastname space initials
+        end
       end
       cont.title = doc.xpath("//ArticleTitle")[0].to_s.split(tagr)[1]
       cont.abstract = doc.xpath("//AbstractText")[0].to_s.split(tagr)[1]
