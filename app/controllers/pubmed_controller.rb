@@ -43,6 +43,11 @@ class PubmedController < ApplicationController
     search_results = PubmedSearch.search(search_query)
     @articleIDList = search_results.pmids
     @results = ArticleXMLParser.new(@articleIDList) #names should be changed
+    @current_results = Array.new
+    @results.each do |result|
+      @current_results.push(result)
+    end
+    @current_results = Kaminari::PaginatableArray.new(@current_results).page(0).per(10)
     #i = 0
     #@results.each do |result|
     #    break if i > 5

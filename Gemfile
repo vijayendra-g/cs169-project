@@ -44,3 +44,4 @@ gem 'haml'
 
 gem "libxml-ruby"
 gem "pubmed_search", "~> 0.4.0"
+gem "kaminari"
