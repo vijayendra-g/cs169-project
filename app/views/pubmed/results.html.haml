@@ -1,19 +1,19 @@
 =form_tag '/search', :method => :post do
 
   = label :search_label, :search_label, 'Input your search term:'
-  = text_field '', :search_term
+  = text_field '', :search_term, :value => session[:search_term] if session[:search_term] != nil
   %br
   %br
   = label :mesh_major_topic, :mesh_major_topic, 'Input MeSH major topic:'
-  = text_field '', :major_topic
+  = text_field '', :major_topic, :value => session[:major_topic] if session[:major_topic] !=nil
   %br
   %br
   = label :mesh_subheading, :mesh_subheading, 'Input MeSH subheading:'
-  = text_field '', :subheading
+  = text_field '', :subheading, :value=> session[:subheading] if session[:subheading] !=nil
   %br
   %br
   = label :mesh_terms, :mesh_terms, 'Input MeSH terms:'
-  = text_field '', :terms
+  = text_field '', :terms, :value=> session[:terms] if session[:terms] != nil
   %br
   %br
   = submit_tag 'Search!'
