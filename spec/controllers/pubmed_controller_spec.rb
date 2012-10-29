@@ -1,27 +1,25 @@
 require 'spec_helper'
 
 describe PubmedController do   
-=begin
+begin
   describe 'search a term in pubmed' do
-    before :each do
-	@fake_results = "[article1 by pedro, article2 by pedro]"
-    end
-    it 'should call the model method that performs pubMed search' 
-	Pubmed.should_receive(:find_in_pubmed).with( {:author => 'pedro'}).and_return(@fake_results)
-	post :search_pubmed, {:search_terms => {:author => 'pedro'}}
+    it 'should call the controller method that performs pubMed search' do
+	post :search, :search_term => 'bullshit'
+	#PubmedController.should_receive(:search).with({:search_term => 'bullshit'})
     end
     describe 'after search' do
 	before :each do
-	  Pubmed.stub(:find_in_pubmed).and_return(@fake_results)
-          post :search_pubmed, {:search_terms => {:author => 'pedro'}}
+          @fake_results = 'a list of articles'
+	  PubmedController.stub(:search).and_return(@fake_results)
+          post :search, {:search_term => 'bullshit'}
 	end
-	it 'should select the search results template for rendering' do	
-          response.should render_template('search_pubmed')
+	it 'should select the search results template for rendering' do
+          response.should render_template('results')
         end
-        it 'should make the pubMed search results available to that template'
-	  assign(:articles).should == @fake_results
+        it 'should make the pubMed search results available to that template'do
+	  #assign(:results).should == @fake_results
 	end
     end
   end
-=end
+end
 end

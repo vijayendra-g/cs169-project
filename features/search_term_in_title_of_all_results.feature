@@ -7,19 +7,16 @@ Feature: search a medical term in Drufus
 Background: existing settings
   Given I am on the home page of "Drufus"
 
-Scenario: search term (happy path)
-  When I fill in "_search_term" with "bullshit"
+Scenario: search for term (happy path)
+  When I fill in "_search_term" with "mumps"
   And I press "Search"
-  Then I should see "bullshit"
+  Then I should see "mumps"
+  And I press "Next Page"
+  Then I should see "Displaying Results 11-20"
+  And I press "Previous Page"
+  Then I should see "Displaying Results 1-10"
 
-#Scenario: search term in title (happy path)
-#  Given I am on the home page of "Drufus"
-#  When I fill in "Search Term" with "mumps"
-#  And I press "Search"
-#  Then all results should have "mumps" in the title
-
-#Scenario: search term in title (sad path)
-#  Given I am on the home page of "Drufus"
-#  When I fill in "Search Term" with "vknskdvndsnknvskdvnkndvk"
-#  And I press "Search"
-#  Then there should be no results
+Scenario: search for term with no results (sad path)
+  When I fill in "_search_term" with "vknskdvndsnknvskdvnkndvk"
+  And I press "Search"
+  Then I should not see "vknskdvndsnknvskdvnkndvk"

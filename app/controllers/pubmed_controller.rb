@@ -7,8 +7,9 @@ class PubmedController < ApplicationController
 
   def search
     connector = "AND"
-    
     puts "Starting topic"
+    medical_field = "Anesthesia"
+
     if params[:major_topic] != nil && params[:major_topic] != ""
       search_query = "#{params[:major_topic]}[MeSH Major Topic]"
     end
@@ -52,6 +53,10 @@ class PubmedController < ApplicationController
     #    i = i + 1
     #end
     #puts "We have " + i.to_s + " articles"
+    session[:subheading] = params[:subheading]
+    session[:terms] = params[:terms]
+    session[:search_term] = params[:search_term]
+    session[:major_topic] = params[:major_topic]
     render 'results'
   end
 
