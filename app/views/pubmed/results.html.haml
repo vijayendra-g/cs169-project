@@ -21,6 +21,11 @@
 %br
 %br
 
+-@current_results.each do |result|
+  =link_to result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
+  =result.date
+  =result.abstract
+
 =paginate @current_results
 
 
