@@ -22,9 +22,12 @@
 %br
 
 -@current_results.each do |result|
-  %h4{:align => 'left'} link_to result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
-  =result.date
-  =result.abstract
+  ={:align => 'left'} link_to result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
+  %br
+  ={:align => 'left'} result.date
+  %br
+  ={:align => 'left'} result.abstract
+  %br
   %br
 
 =paginate @current_results
