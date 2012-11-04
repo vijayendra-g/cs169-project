@@ -22,11 +22,11 @@
 %br
 
 -@current_results.each do |result|
-  ={:align => 'left'} link_to result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
+  =link_to{:align => 'left'} result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
   %br
-  ={:align => 'left'} result.date
+  =result.date
   %br
-  ={:align => 'left'} result.abstract
+  =result.abstract
   %br
   %br
 
