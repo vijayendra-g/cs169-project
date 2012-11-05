@@ -165,6 +165,7 @@ module PubmedHelper
         cont.date = dsplit[2].to_s + ' ' + dsplit[4].to_s + ' ' + dsplit[6].to_s
         ret << cont
       end
+      return ret
     end
 
     def retrieve100(articleArray)
