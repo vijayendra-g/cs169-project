@@ -16,7 +16,7 @@ module PubmedHelper
     end
 
   end
-
+1,2,3,4,5,6,7,8,9,10
   class ArticleXMLParser
     include Enumerable
 
@@ -76,10 +76,25 @@ module PubmedHelper
     end
 """
 
+"""
     def each
       @arr.each do |n|
         p = parse(n)
         #yield p if p.title.include?('sickle')
+
+        @terms.each do |t|
+          if p.title.include?(t)
+            yield p
+            break
+          end
+        end
+
+      end
+    end
+"""
+
+    def each
+      parse(@arr).each do |p|
 
         @terms.each do |t|
           if p.title.include?(t)
@@ -158,8 +173,9 @@ module PubmedHelper
         """
         cont.authors = ["not implemented"]
         cont.title = doc.xpath('//ArticleTitle')[offset].to_s.split(tagr)[1]
-        cont.abstract = doc.xpath('//AbstractText')[offset].to_s.split(tagr)[1]
-        cont.affiliation = doc.xpath('//Affiliation')[offset].to_s.split(tagr)[1]
+        #FIXME cont.abstract = doc.xpath('//AbstractText')[offset].to_s.split(tagr)[1]
+        cont.abstract = ""
+        #UNUSED cont.affiliation = doc.xpath('//Affiliation')[offset].to_s.split(tagr)[1]
         cont.id = articleNumArray[offset]
         dsplit = doc.xpath('//PubDate')[offset].to_s.split(tagr)
         cont.date = dsplit[2].to_s + ' ' + dsplit[4].to_s + ' ' + dsplit[6].to_s
