@@ -66,15 +66,15 @@ module PubmedHelper
     def each
       @arr.each do |n|
         p = parse(n)
-        yield p if p.title.include?('sickle')
-        '''
+        #yield p if p.title.include?('sickle')
+
         @terms.each do |t|
           if p.title.include?(t)
             yield p
             break
           end
         end
-        '''
+        
       end
     end
 
