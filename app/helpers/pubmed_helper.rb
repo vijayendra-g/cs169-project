@@ -155,12 +155,14 @@ module PubmedHelper
         url += a.to_s + ','
       end
       doc = Nokogiri::XML(open(url + '&retmode=xml'))
-
-#OSDJDJFKJNKJNDBJHKGAi:
       (0..49).each do |offset|
         break if offset == articleNumArray.length
         #use doc.xpath for stuff
         cont = ArticleContainer.new
+        oneXML = doc.xpath('//PubmedArticle')[offset].to_s
+
+#LDKLDFKJLSDKFJLKSDJFLK
+
         """ #todo; not used in view yet
         doc.xpath('//Author').each do |a|
           if(a != nil && a != "")
@@ -171,13 +173,15 @@ module PubmedHelper
           end
         end
         """
+
+
+
         cont.authors = ["not implemented"]
-        cont.title = doc.xpath('//ArticleTitle')[offset].to_s.split(tagr)[1]
-        #FIXME cont.abstract = doc.xpath('//AbstractText')[offset].to_s.split(tagr)[1]
-        cont.abstract = ""
-        #UNUSED cont.affiliation = doc.xpath('//Affiliation')[offset].to_s.split(tagr)[1]
-        cont.id = articleNumArray[offset]
-        dsplit = doc.xpath('//PubDate')[offset].to_s.split(tagr)
+        cont.title = oneXML.xpath('//ArticleTitle')[0].to_s.split(tagr)[1]
+        cont.abstract = oneXML.xpath('//AbstractText')[0].to_s.split(tagr)[1]
+        #UNUSED cont.affiliation = oneXML.xpath('//Affiliation')[offset].to_s.split(tagr)[1]
+        cont.id = articleNumArray[0]
+        dsplit = oneXML.xpath('//PubDate')[0].to_s.split(tagr)
         cont.date = dsplit[2].to_s + ' ' + dsplit[4].to_s + ' ' + dsplit[6].to_s
         ret << cont
       end
