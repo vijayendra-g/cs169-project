@@ -39,6 +39,17 @@ module PubmedHelper
     end
 """
 
+    def titleTermCount(articleNum)
+      #get xml for title only, check number of search terms in title
+      result = 0
+      tagr = /<[^<>]*>/
+      doc = Nokogiri::XML(open('http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=' + articleNum.to_s + '&retmode=xml'))
+      title = doc.xpath("//ArticleTitle")[0].to_s.split(tagr)[1].downcase.split(/\s/)
+      @terms.each do |t|
+        result += 1 if title.include? t
+      end
+      return result
+    end
 
     #sorting by number of search terms contained in title
     def each
