@@ -159,7 +159,7 @@ module PubmedHelper
         break if offset == articleNumArray.length
         #use doc.xpath for stuff
         cont = ArticleContainer.new
-        oneXML = doc.xpath('//PubmedArticle')[offset].to_s
+        oneXML = doc.xpath('//PubmedArticle')[offset]
 
 #LDKLDFKJLSDKFJLKSDJFLK
 
