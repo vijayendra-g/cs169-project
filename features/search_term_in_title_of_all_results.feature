@@ -11,10 +11,6 @@ Scenario: search for term (happy path)
   When I fill in "_search_term" with "laryngospasm"
   And I press "Search"
   Then I should see "laryngospasm"
-  And I press "Next Page"
-  Then I should see "Displaying Results 11-20"
-  And I press "Previous Page"
-  Then I should see "Displaying Results 1-10"
 
 Scenario: search for term with no results (sad path)
   When I fill in "_search_term" with "vknskdvndsnknvskdvnkndvk"
