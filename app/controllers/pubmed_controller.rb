@@ -6,6 +6,9 @@ class PubmedController < ApplicationController
   end
 
   def search
+    if params[:major_topic] == nil && params[:subheading] == nil && params[:terms] == nil && params[:search_term] == nil
+	render 'search' and return
+    end
     connector = "AND"
     puts "Starting topic"
     medical_field = "Anesthesia"
