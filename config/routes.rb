@@ -2,6 +2,10 @@ Cs169Project::Application.routes.draw do
   get "/search" => 'pubmed#search'
 
   root :to => 'pubmed#index'
+
+  match "/auth/:provider/callback" => "sessions#create"
+
+  match "/signout" => "sessions#signout", :as => :signout
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
