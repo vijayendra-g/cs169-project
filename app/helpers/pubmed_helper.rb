@@ -97,6 +97,8 @@ module PubmedHelper
       @arr.count
     end
 
+"""
+    #parse one article; slow but it works
     def parse(articleNum)
       #get xml from articleNum
       #parse, putting relevant information into data structure of some sort
@@ -105,7 +107,7 @@ module PubmedHelper
       cont = ArticleContainer.new
       doc = Nokogiri::XML(open('http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=' + articleNum.to_s + '&retmode=xml'))
       #use doc.xpath for stuff
-      doc.xpath("//Author").each do |a|
+      doc.xpath('//Author').each do |a|
         if(a != nil && a != "")
           asplit = a.to_s.split(tagr)
         end
@@ -113,15 +115,57 @@ module PubmedHelper
           cont.authors << asplit[2] + ' ' + asplit[6] #lastname space initials
         end
       end
-      cont.title = doc.xpath("//ArticleTitle")[0].to_s.split(tagr)[1]
-      cont.abstract = doc.xpath("//AbstractText")[0].to_s.split(tagr)[1]
-      cont.affiliation = doc.xpath("//Affiliation")[0].to_s.split(tagr)[1]
+      cont.title = doc.xpath('//ArticleTitle')[0].to_s.split(tagr)[1]
+      cont.abstract = doc.xpath('//AbstractText')[0].to_s.split(tagr)[1]
+      cont.affiliation = doc.xpath('//Affiliation')[0].to_s.split(tagr)[1]
       cont.id = articleNum
-      dsplit = doc.xpath("//PubDate")[0].to_s.split(tagr)
+      dsplit = doc.xpath('//PubDate')[0].to_s.split(tagr)
       cont.date = dsplit[2].to_s + ' ' + dsplit[4].to_s + ' ' + dsplit[6].to_s
       return cont
     end
+"""
 
+    #parse 50 articles, return array of container objects
+    def parse(articleNumArray)
+      #get xml from articleNumArray
+      #parse, putting relevant information into data structure of some sort
+      #return an array of those data structure
+      
+      ret = []
+
+      tagr = /<[^<>]*>/
+      url = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id='
+      articleNumArray.each_with_index do |a,i|
+        break if i==50
+        url += a.to_s + ','
+      end
+      doc = Nokogiri::XML(open(url + '&retmode=xml'))
+
+#OSDJDJFKJNKJNDBJHKGAi:
+      (0..49).each do |offset|
+        break if offset == articleNumArray.length
+        #use doc.xpath for stuff
+        cont = ArticleContainer.new
+        """ #todo; not used in view yet
+        doc.xpath('//Author').each do |a|
+          if(a != nil && a != "")
+          asplit = a.to_s.split(tagr)
+          end
+          if(asplit[2] != nil && asplit[6] != nil)
+            cont.authors << asplit[2] + ' ' + asplit[6] #lastname space initials
+          end
+        end
+        """
+        cont.authors = ["not implemented"]
+        cont.title = doc.xpath('//ArticleTitle')[offset].to_s.split(tagr)[1]
+        cont.abstract = doc.xpath('//AbstractText')[offset].to_s.split(tagr)[1]
+        cont.affiliation = doc.xpath('//Affiliation')[offset].to_s.split(tagr)[1]
+        cont.id = articleNumArray[offset]
+        dsplit = doc.xpath('//PubDate')[offset].to_s.split(tagr)
+        cont.date = dsplit[2].to_s + ' ' + dsplit[4].to_s + ' ' + dsplit[6].to_s
+        ret << cont
+      end
+    end
 
     def retrieve100(articleArray)
       
