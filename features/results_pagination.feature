@@ -11,9 +11,9 @@ Scenario: search for term that have results across pages (happy path)
   When I fill in "_search_term" with "headache"
   And I press "Search"
   Then the current page should be "1"
-  When I press "Next"
+  When I follow "Next"
   Then the current page should be "2"
-  When I press "Prev"
+  When I follow "Prev"
   Then the current page should be "1"
 
 Scenario: search for term with no results (sad path)
