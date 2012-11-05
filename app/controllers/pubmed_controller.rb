@@ -46,11 +46,8 @@ class PubmedController < ApplicationController
     @articleIDList = search_results.pmids
     @results = ArticleXMLParser.new(@articleIDList, params[:search_term]) #names should be changed
     @current_results = Array.new
-    i = 0
     @results.each do |result|
-      break if i == 40
       @current_results.push(result)
-      i += 1
     end
     @current_results = Kaminari::PaginatableArray.new(@current_results).page(params[:page]).per(10)
     #i = 0

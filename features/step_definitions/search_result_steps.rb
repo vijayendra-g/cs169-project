@@ -36,7 +36,7 @@ end
 
 
 #for pagination feature
-Then /^the current page number should be (\d+)$/ do |num|
-  assert_equal page.find(".page.current").text num.to_s
+Then /^the current page number should be (\d)$/ do |num|
+  assert page.find(".page.current").text.include? (num.to_s)
 end
 
