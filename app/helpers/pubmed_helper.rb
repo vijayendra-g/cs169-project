@@ -74,7 +74,7 @@ module PubmedHelper
             break
           end
         end
-        
+
       end
     end
 
