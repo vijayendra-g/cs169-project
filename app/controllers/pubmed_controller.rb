@@ -41,7 +41,7 @@ class PubmedController < ApplicationController
     puts "Search query is " + search_query
     search_results = PubmedSearch.search(search_query)
     @articleIDList = search_results.pmids
-    @results = ArticleXMLParser.new(@articleIDList) #names should be changed
+    @results = ArticleXMLParser.new(@articleIDList, params[:search_term]) #names should be changed
     @current_results = Array.new
     @results.each do |result|
       @current_results.push(result)

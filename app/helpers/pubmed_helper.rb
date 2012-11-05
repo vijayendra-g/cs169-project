@@ -22,17 +22,62 @@ module PubmedHelper
 
 
 
-    def initialize(articleArray)
-      @arr = articleArray.clone
+    def initialize(articleArray, search)
+      @terms = search.to_s.downcase.split(/\s/) #words in search term
+      @arr = articleArray.clone #article numbers
+      @termCounts = {} #article number -> number of search terms in title
+      @termCounts.default = [] #helper - be careful of how this is used later!
     end
 
 
 
-    def each
+"""
+    def each #original working without sorting
       @arr.each do |n|
         yield parse(n)
       end
     end
+"""
+
+"""
+    #sorting by number of search terms contained in title
+    def each
+      curr = @terms.count
+      @arr.each do |n|
+        count = titleTermCount(n)
+        if count == curr #title contains all search terms
+          yield parse(n)
+        else
+          @termCounts[count] = @termCounts[count].push(n)
+        end
+      end
+      curr -= 1
+      #iterate through lists of articles without all terms in title
+      while curr >= 0
+        @termCounts[curr].each do |n|
+          yield parse(n)
+        end
+        curr -= 1
+      end
+    end
+"""
+
+
+    def each
+      @arr.each do |n|
+        p = parse(n)
+        yield p if p.title.include?('sickle')
+        '''
+        @terms.each do |t|
+          if p.title.include?(t)
+            yield p
+            break
+          end
+        end
+        '''
+      end
+    end
+
 
     def count
       @arr.count
