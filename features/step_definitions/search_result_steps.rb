@@ -29,3 +29,10 @@ end
 Then /^there should be "(\d)" results$/ do |num|
   assert results.count == num
 end
+
+
+#for pagination feature
+Then /^the current page number should be (\d+)$/ do |num|
+  assert_equal page.find(".page.current").text num.to_s
+end
+
