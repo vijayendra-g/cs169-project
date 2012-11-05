@@ -51,6 +51,7 @@ module PubmedHelper
       return result
     end
 
+"""
     #sorting by number of search terms contained in title
     def each
       curr = @terms.count
@@ -71,9 +72,8 @@ module PubmedHelper
         curr -= 1
       end
     end
-
-
 """
+
     def each
       @arr.each do |n|
         p = parse(n)
@@ -88,7 +88,7 @@ module PubmedHelper
 
       end
     end
-"""
+
 
 
     def count
