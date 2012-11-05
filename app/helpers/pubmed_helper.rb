@@ -45,7 +45,7 @@ module PubmedHelper
       result = 0
       tagr = /<[^<>]*>/
       doc = Nokogiri::XML(open('http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=' + articleNum.to_s + '&retmode=xml'))
-      title = doc.xpath("//ArticleTitle")[0].to_s.split(tagr)[1].downcase.split(/\s/)
+      title = doc.xpath('//ArticleTitle')[0].to_s.split(tagr)[1].downcase.split(/\s/)
       @terms.each do |t|
         result += 1 if title.include? t
       end
