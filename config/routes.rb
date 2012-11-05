@@ -1,5 +1,5 @@
 Cs169Project::Application.routes.draw do
-  post "/search" => 'pubmed#search'
+  get "/search" => 'pubmed#search'
 
   root :to => 'pubmed#index'
 

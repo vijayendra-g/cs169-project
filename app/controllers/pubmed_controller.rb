@@ -6,6 +6,9 @@ class PubmedController < ApplicationController
   end
 
   def search
+    if params[:major_topic] == nil && params[:subheading] == nil && params[:terms] == nil && params[:search_term] == nil
+	render 'search' and return
+    end
     connector = "AND"
     puts "Starting topic"
     medical_field = "Anesthesia"
@@ -30,23 +33,26 @@ class PubmedController < ApplicationController
 
     puts "Starting final"
     if search_query != nil && params[:search_term] != nil && params[:search_term] != ""
-      search_query = "((" + search_query + ") " + connector + " Anesthesia[MeSH Terms]) " + connector + " #{params[:search_term]}"
+      search_query = "((" + search_query + ") " + connector + " " + medical_field + "[MeSH Terms]) " + connector + " #{params[:search_term]}"
     elsif search_query == nil && params[:search_term] != nil && params[:search_term] != ""
-      search_query = "(Anesthesia[MeSH Terms]) " + connector + " #{params[:search_term]}"
+      search_query = "(" + medical_field + "[MeSH Terms]) " + connector + " #{params[:search_term]}"
     elsif search_query != nil && (params[:search_term] == nil || params[:search_term] == "")
-      search_query = "(" + search_query + ") " + connector + " Anesthesia[MeSH Terms]"
+      search_query = "(" + search_query + ") " + connector + " " + medical_field +"[MeSH Terms]"
     else
-      search_query = "Anesthesia[MeSH Terms]"
+      search_query = medical_field + "[MeSH Terms]"
     end
     puts "Search query is " + search_query
     search_results = PubmedSearch.search(search_query)
     @articleIDList = search_results.pmids
-    @results = ArticleXMLParser.new(@articleIDList) #names should be changed
+    @results = ArticleXMLParser.new(@articleIDList, params[:search_term]) #names should be changed
     @current_results = Array.new
+    i = 0
     @results.each do |result|
+      break if i == 40
       @current_results.push(result)
+      i += 1
     end
-    @current_results = Kaminari::PaginatableArray.new(@current_results).page(0).per(10)
+    @current_results = Kaminari::PaginatableArray.new(@current_results).page(params[:page]).per(10)
     #i = 0
     #@results.each do |result|
     #    break if i > 5

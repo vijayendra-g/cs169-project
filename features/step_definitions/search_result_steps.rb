@@ -1,6 +1,10 @@
 #for institution.feature
 lists = {} #for reputable institutions, in actual implementation, this should either be built in to app or dependent on user
 
+Then /^the current page should be "(\d)"$/ do |number|
+  page.should have_content(number)
+end
+
 #for institution.feature
 Given /^the following are in "([^"]*)": (.*)$/ do |listname, items|
   lists[listname] = items.split(',')
