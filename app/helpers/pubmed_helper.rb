@@ -39,6 +39,7 @@ module PubmedHelper
     end
 """
 
+"""
     def titleTermCount(articleNum)
       #get xml for title only, check number of search terms in title
       result = 0
@@ -50,6 +51,7 @@ module PubmedHelper
       end
       return result
     end
+"""
 
 """
     #sorting by number of search terms contained in title
