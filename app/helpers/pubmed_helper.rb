@@ -27,84 +27,28 @@ module PubmedHelper
       @arr = articleArray.clone #article numbers
       @termCounts = {} #article number -> number of search terms in title
       @termCounts.default = [] #helper - be careful of how this is used later!
-      @resultLimit = 200 #change as preferred
+      @resultLimit = 300 #change as preferred
     end
 
 
-
-"""
-    def each #original working without sorting
-      @arr.each do |n|
-        yield parse(n)
-      end
-    end
-"""
-
-"""
-    def titleTermCount(articleNum)
-      #get xml for title only, check number of search terms in title
-      result = 0
-      tagr = /<[^<>]*>/
-      doc = Nokogiri::XML(open('http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=' + articleNum.to_s + '&retmode=xml'))
-      title = doc.xpath('//ArticleTitle')[0].to_s.split(tagr)[1].downcase.split(/\s/)
-      @terms.each do |t|
-        result += 1 if title.include? t
-      end
-      return result
-    end
-"""
-
-"""
-    #sorting by number of search terms contained in title
-    def each
-      curr = @terms.count
-      @arr.each do |n|
-        count = titleTermCount(n)
-        if count == curr #title contains all search terms
-          yield parse(n)
-        else
-          @termCounts[count] = @termCounts[count].push(n)
-        end
-      end
-      curr -= 1
-      #iterate through lists of articles without all terms in title
-      while curr >= 0
-        @termCounts[curr].each do |n|
-          yield parse(n)
-        end
-        curr -= 1
-      end
-    end
-"""
-
-"""
-    def each
-      @arr.each do |n|
-        p = parse(n)
-        #yield p if p.title.include?('sickle')
-
-        @terms.each do |t|
-          if p.title.include?(t)
-            yield p
-            break
-          end
-        end
-
-      end
-    end
-"""
 
     def each
+      delayArticle = []
       parse(@arr).each do |p|
-
+        toReturn = true
         @terms.each do |t|
-          if p.title.include?(t)
-            yield p
+          if not p.title.include?(t)
+            toReturn = false;
             break
           end
         end
-
+        if toReturn
+          yield p
+        else
+          delayArticle << p
+        end
       end
+      delayArticle.each {|p| yield p}
     end
 
 
@@ -148,7 +92,7 @@ module PubmedHelper
         cont.id = articleNumArray[offset]
         dsplit = oneXML.xpath('//PubDate')[0].to_s.split(tagr)
         cont.date = dsplit[2].to_s + ' ' + dsplit[4].to_s + ' ' + dsplit[6].to_s
-        ret << cont.clone
+        ret << cont
       end
       return ret
     end
