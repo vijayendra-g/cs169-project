@@ -10,28 +10,28 @@ class PubmedController < ApplicationController
 	render 'search' and return
     end
     connector = "AND"
-    puts "Starting topic"
+    #puts "Starting topic"
     medical_field = "Anesthesia"
 
     if params[:major_topic] != nil && params[:major_topic] != ""
       search_query = "#{params[:major_topic]}[MeSH Major Topic]"
     end
 
-    puts "Starting subheading"
+    #puts "Starting subheading"
     if params[:subheading] != nil && params[:subheading] != "" && search_query != nil
       search_query = "(" + search_query + ") " + connector + " #{params[:subheading]}[MeSH Subheading]"
     elsif params[:subheading] != nil && params[:subheading] != ""
       search_query = "#{params[:subheading]}[MeSH Subheading]"
     end
 
-    puts "Starting terms"
+    #puts "Starting terms"
     if params[:terms] != nil && params[:terms] != "" && search_query != nil
       search_query = "(" + search_query + ") " + connector + " #{params[:terms]}[MeSH Terms]"
     elsif params[:terms] != nil && params[:terms] != ""
       search_query = "#{params[:terms]}[MeSH Terms]"
     end
 
-    puts "Starting final"
+    #puts "Starting final"
     if search_query != nil && params[:search_term] != nil && params[:search_term] != ""
       search_query = "((" + search_query + ") " + connector + " " + medical_field + "[MeSH Terms]) " + connector + " #{params[:search_term]}"
     elsif search_query == nil && params[:search_term] != nil && params[:search_term] != ""
@@ -41,7 +41,7 @@ class PubmedController < ApplicationController
     else
       search_query = medical_field + "[MeSH Terms]"
     end
-    puts "Search query is " + search_query
+    #puts "Search query is " + search_query
     search_results = PubmedSearch.search(search_query)
     @articleIDList = search_results.pmids
     @results = ArticleXMLParser.new(@articleIDList, params[:search_term]) #names should be changed
