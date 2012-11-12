@@ -24,3 +24,8 @@ body{
   margin-left: 220px;
   text-align: center;
 }
+
+div.login{
+  position: relative;
+  margin-left: 60%;
+}
