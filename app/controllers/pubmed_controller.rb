@@ -7,7 +7,10 @@ class PubmedController < ApplicationController
 
   def search
     if params[:search_term].blank?
-	render 'search' and return
+	flash[:notice] = "Please input a search term"
+	session[:search_term] = nil
+	redirect_to root_path
+	return
     end
     connector = 'AND'
     medical_field = "Anesthesia"
@@ -35,6 +38,7 @@ class PubmedController < ApplicationController
     session[:search_term] = params[:search_term]
 
     render 'results'
+
   end
 
 end

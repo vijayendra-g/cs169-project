@@ -1,12 +1,4 @@
-=form_tag '/search', :method => :get do
-
-  = label :search_label, :search_label, 'Input your search term:'
-  = text_field '', :search_term, :value => session[:search_term] if session[:search_term] != nil
-  %br
-
-  %br
-  = submit_tag 'Search!'
-
+= render :partial => 'search_box'
 %br
 %br
 
