@@ -10,11 +10,10 @@ Background: existing settings
 Scenario: search for term that have results across pages (happy path)
   When I fill in "_search_term" with "headache"
   And I press "Search"
-
   Then the current page number should be 1
   When I follow "Next"
   Then the current page number should be 2
-  When I follow "Prev"
+  When I follow "First"
   Then the current page number should be 1
 
 Scenario: search for term with no results (sad path)

@@ -2,7 +2,7 @@
 =form_tag '/search', :method => :get do
 
   = label :search_label, :search_label, 'Input your search term:'
-  = text_field '', :search_term, :value => session[:search_term] ? '' : session[:search_term]
+  = text_field '', :search_term, :value => session[:search_term] ? session[:search_term] : ''
   %br
   %br
   - if flash[:notice]

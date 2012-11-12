@@ -2,6 +2,7 @@ class PubmedController < ApplicationController
   include PubmedHelper
   
   def index
+    session[:search_term] = nil
     render 'search'
   end
 

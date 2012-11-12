@@ -70,7 +70,7 @@ module PubmedHelper
       #return an array of those data structure
       
       ret = []
-
+      return ret if articleNumArray.length == 0
       tagr = /<[^<>]*>/
       url = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id='
       articleNumArray.each_with_index do |a,i|
