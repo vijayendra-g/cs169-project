@@ -9,10 +9,13 @@ module PubmedHelper
   class ArticleContainer
 
     #authors is a list of strings
-    attr_accessor :authors, :title, :abstract, :date, :affiliation, :id
+    attr_accessor :authors, :title, :abstract, :date, :affiliation, :id, :failHash, :delayHash, :ratingsHash
 
     def initialize
       @authors = []
+      @failHash = {}
+      @delayHash = {}
+      @ratingsHash = {}
     end
 
   end
@@ -35,17 +38,20 @@ module PubmedHelper
     def each
       delayArticle = []
       parse(@arr).each do |p|
-        toReturn = true
-        @terms.each do |t|
-          if not p.title.include?(t)
-            toReturn = false;
-            break
-          end
-        end
+        prioritize = true
+        toReturn = !p.failHash.has_value?(true)
         if toReturn
-          yield p
-        else
-          delayArticle << p
+          @terms.each do |t|
+            if not p.title.include?(t)
+              prioritize = false;
+              break
+            end
+          end
+          if prioritize and !p.delayHash.has_value?(true)
+            yield p
+          else
+            delayArticle << p
+          end
         end
       end
       delayArticle.each {|p| yield p}
@@ -92,6 +98,9 @@ module PubmedHelper
         cont.id = articleNumArray[offset]
         dsplit = oneXML.xpath('//PubDate')[0].to_s.split(tagr)
         cont.date = dsplit[2].to_s + ' ' + dsplit[4].to_s + ' ' + dsplit[6].to_s
+        cont.failHash[:noAbstract] = cont.abstract == nil
+        cont.failHash[:notEnglish] = oneXML.xpath('//Language')[0].to_s.split(tagr)[1] != 'eng'
+        cont.delayHash[:noHumanMesh] = !oneXML.xpath('//MeshHeadingList')[0].to_s.include?('Humans')
         ret << cont
       end
       return ret

@@ -25,9 +25,14 @@ body{
   text-align: center;
 }
 
+
 .notice {
   color: #A00000;
   margin-right:220px;
   margin-left: 220px;
   padding: 4px;
+}
+div.login{
+  position: relative;
+  margin-left: 60%;
 }
