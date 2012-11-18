@@ -5,8 +5,9 @@
   = text_field '', :search_term, :value => session[:search_term] ? session[:search_term] : ''
   %br
   %br
+  = submit_tag 'Search!'
+  %br
+  %br
   - if flash[:notice]
     .notice 
       = flash[:notice]
-  = submit_tag 'Search!'
-

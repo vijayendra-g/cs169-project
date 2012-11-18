@@ -32,7 +32,7 @@ body{
   margin-left: 220px;
   padding: 4px;
 }
-div.login{
+#user_nav{
   position: relative;
   margin-left: 60%;
 }
