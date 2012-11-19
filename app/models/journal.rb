@@ -6,7 +6,7 @@ class Journal < ActiveRecord::Base
         return j.impact
       end
     end
-    return false
+    return 0
   end
 
 end
