@@ -1,0 +1,14 @@
+.search_box
+  %h1 Search PubMed's database
+  =form_tag '/search', :method => :get do
+
+    = label :search_label, :search_label, 'Input your search term:'
+    = text_field '', :search_term, :value => session[:search_term] ? session[:search_term] : ''
+    %br
+    %br
+    = submit_tag 'Search!'
+    %br
+    %br
+    - if flash[:notice]
+      .notice 
+        = flash[:notice]
