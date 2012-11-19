@@ -5,6 +5,11 @@ Cs169Project::Application.routes.draw do
 
   match "/auth/:provider/callback" => "sessions#create"
 
+  get "/auth/failure" do
+    flash[:notice] = params[:message]
+    redirect '/'
+  end
+
   match "/signout" => "sessions#destroy", :as => :signout
   
   # The priority is based upon order of creation:
