@@ -7,8 +7,9 @@
   "No results found."
 -@current_results.each do |result|
   %p{:align => 'left'}=link_to result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
-  %p{:align => 'left'}=result.date
-  %p{:align => 'left'}=result.abstract
+  %p{:align => 'left'}='Publication Date: ' + result.date
+  %p{:align => 'left'}='Journal: ' + result.journal
+  %p{:align => 'left'}='Abstract: ' + result.abstract
   %br
 
 =paginate @current_results
