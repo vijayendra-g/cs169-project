@@ -11,6 +11,8 @@ end
 
 Before('@omniauth_fail') do
   OmniAuth.config.test_mode = true
+
+  OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
 end
 
 After('@omniauth_test') do

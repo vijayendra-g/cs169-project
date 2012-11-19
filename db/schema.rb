@@ -11,12 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121118062437) do
+ActiveRecord::Schema.define(:version => 20121119013121) do
 
   create_table "identities", :force => true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "journals", :force => true do |t|
+    t.string   "iso"
+    t.text     "title"
+    t.float    "impact"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

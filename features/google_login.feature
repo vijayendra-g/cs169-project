@@ -20,6 +20,5 @@ Scenario: successful user login (happy path)
 
 @omniauth_fail
 Scenario: failed user login (sad path)
-  When I follow "Sign in with Google"
-  And Google doesn't authorize me
-  Then I should see "Sign in with Google"
+  When I am on the home page of "Drufus"
+  And I should see "Sign in with Google"

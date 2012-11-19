@@ -3,5 +3,4 @@ And /^Google authorizes me$/ do
 end
 
 And /^Google doesn't authorize me$/ do
-  OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
 end
