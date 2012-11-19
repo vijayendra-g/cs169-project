@@ -122,7 +122,7 @@ module PubmedHelper
 
         #adjust rating for impact factor based on values in database
         journalAbbrev = oneXML.xpath('//ISOAbbreviation')[0].to_s.split(tagr)[1]
-        cont.rating += 1*Journal.impact(journalAbbrev)
+        cont.rating += 2*Journal.impact(journalAbbrev)
 
         #put filled container in array for return
         ret << cont
