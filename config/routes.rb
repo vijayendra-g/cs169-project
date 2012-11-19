@@ -5,6 +5,11 @@ Cs169Project::Application.routes.draw do
   
   match "/auth/:provider/callback" => "sessions#create"
 
+  get "/auth/failure" do
+    flash[:notice] = params[:message]
+    redirect '/'
+  end
+
   match "/signout" => "sessions#destroy", :as => :signout
   
   match "/user/save_article" => "user#save_article", :as => :save_article
