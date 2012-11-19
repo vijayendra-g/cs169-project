@@ -18,7 +18,7 @@
 # * http://elabs.se/blog/15-you-re-cuking-it-wrong
 #
 
-
+require 'fakeweb'
 require 'uri'
 require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
@@ -42,6 +42,9 @@ When /^(.*) within (.*[^:]):$/ do |step, parent, table_or_string|
 end
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
+  #FakeWeb.register_uri(:any, :any, :body => "WTF")
+  #PubmedController.should_receive(:request_Pubmed).and_return([3000, 4000, 5000, 22523416])
+  #PubmedController.should_receive(:parse_Articles).and_return()
   visit path_to(page_name)
 end
 
