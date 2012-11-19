@@ -39,7 +39,7 @@ module PubmedHelper
       articles.each do |p|
         count = 0
         @terms.each do |t|
-          if p.title.include?(t)
+          if p.title.downcase.include?(t)
             count += 1
           end
         end
@@ -62,10 +62,12 @@ module PubmedHelper
 
     #parse @resultLimit articles, return array of container objects
     def parse(articleNumArray)
+      #OVERVIEW
       #get xml from articleNumArray
       #parse, putting relevant information into data structure of some sort
       #return an array of those data structure
       
+      #initialize variables and get XML from web
       ret = []
       return ret if articleNumArray.length == 0
       tagr = /<[^<>]*>/
@@ -75,11 +77,14 @@ module PubmedHelper
         url += a.to_s + ','
       end
       doc = Nokogiri::XML(open(url + '&retmode=xml'))
+
+      #iterate through the articles in the XML
       (0..@resultLimit-1).each do |offset|
         break if offset == articleNumArray.length
         cont = ArticleContainer.new
         oneXML = Nokogiri::XML(doc.xpath('//PubmedArticle')[offset].to_s)
 
+        #store author
         oneXML.xpath('//Author').each do |a|
           if(a != nil && a != "")
           asplit = a.to_s.split(tagr)
@@ -89,25 +94,37 @@ module PubmedHelper
           end
         end
 
+        #store simple variables
         cont.title = oneXML.xpath('//ArticleTitle')[0].to_s.split(tagr)[1]
         cont.abstract = oneXML.xpath('//AbstractText')[0].to_s.split(tagr)[1] #doesn't capture multiple abstract labels
         cont.journal = oneXML.xpath('//Title')[0].to_s.split(tagr)[1]
-        #UNUSED cont.affiliation = oneXML.xpath('//Affiliation')[offset].to_s.split(tagr)[1]
         cont.id = articleNumArray[offset]
+
+        #store date-related variables
         dsplit = oneXML.xpath('//PubDate')[0].to_s.split(tagr)
         cont.date = dsplit[2].to_s + ' ' + dsplit[4].to_s + ' ' + dsplit[6].to_s
         pubYear = dsplit[2].to_s.to_i
+
+        #check for instant fail conditions
         cont.failHash[:noAbstract] = cont.abstract == nil
         cont.failHash[:notEnglish] = oneXML.xpath('//Language')[0].to_s.split(tagr)[1] != 'eng'
+
+        #adjust rating for human focus
         cont.rating += 5 if oneXML.xpath('//MeshHeadingList')[0].to_s.include?('Humans')
+
+        #adjust rating for article publication date
         cont.rating += case pubYear
           when Time.now.year-5..Time.now.year then 5
           when Time.now.year-10..Time.now.year-6 then 3
           when Time.now.year-20..Time.now.year-11 then 1
           else 0
         end
+
+        #adjust rating for impact factor based on values in database
         journalAbbrev = oneXML.xpath('//ISOAbbreviation')[0].to_s.split(tagr)[1]
-        cont.rating += Journal.impact(journalAbbrev)
+        cont.rating += 2*Journal.impact(journalAbbrev)
+
+        #put filled container in array for return
         ret << cont
       end
       return ret
