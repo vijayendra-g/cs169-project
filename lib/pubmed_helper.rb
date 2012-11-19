@@ -107,7 +107,7 @@ module PubmedHelper
           else 0
         end
         journalAbbrev = oneXML.xpath('//ISOAbbreviation')[0].to_s.split(tagr)[1]
-        cont.rating += 5*Journal.impact(journalAbbrev)
+        cont.rating += 500*Journal.impact(journalAbbrev)
         ret << cont
       end
       return ret
