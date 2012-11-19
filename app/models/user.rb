@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   end
 
   def get_saved_articles()
-    logger.info(user.id)
+    logger.info(current_user.id)
     articles = current_user.find().saved_articles
     logger.info(articles)
     return articles
