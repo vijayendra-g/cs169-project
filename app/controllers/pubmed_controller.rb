@@ -5,6 +5,14 @@ class PubmedController < ApplicationController
     session[:search_term] = nil
     render 'search'
   end
+  
+  def requestPubmed(search_query)
+    PubmedSearch.search(search_query)
+  end
+  
+  def parseArticles(articleIDList, parameters)
+    ArticleXMLParser.new(articleIDList, parameters)
+  end
 
   def search
     if params[:search_term].blank?
@@ -18,24 +26,14 @@ class PubmedController < ApplicationController
     search_query = "(" + params[:search_term] + ") " + connector + " " + medical_field +"[MeSH Terms]"
     
     #puts "Search query is " + search_query
-    search_results = PubmedSearch.search(search_query)
+    search_results = requestPubmed(search_query)    
     @articleIDList = search_results.pmids
-    @results = ArticleXMLParser.new(@articleIDList, params[:search_term]) #names should be changed
+    @results = parseArticles(@articleIDList, params[:search_term])
     @current_results = Array.new
     @results.each do |result|
       @current_results.push(result)
     end
     @current_results = Kaminari::PaginatableArray.new(@current_results).page(params[:page]).per(10)
-    #i = 0
-    #@results.each do |result|
-    #    break if i > 5
-    #    puts "Abstract:     " + result.abstract.to_s
-    #    puts "Title:        " + result.title.to_s
-    #    puts "Id:           " + result.id.to_s
-    #    puts "Date:         " + result.date.to_s
-    #    i = i + 1
-    #end
-    #puts "We have " + i.to_s + " articles"
     session[:search_term] = params[:search_term]
 
     render 'results'
