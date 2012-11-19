@@ -1,16 +1,22 @@
-= render :partial => 'google'
-= render :partial => 'search_box'
-%br
-%br
-
--if @current_results.length == 0
-  "No results found."
--@current_results.each do |result|
-  %p{:align => 'left'}=link_to result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
-  %p{:align => 'left'}=result.date
-  %p{:align => 'left'}=result.abstract
+.content
+  = render :partial => 'google'
+  = render :partial => 'search_box'
+  %br
   %br
 
+  -if @current_results.length == 0
+    %p{:align =>'center'} "No results found."
+  -@current_results.each do |result|
+    %div{:class => 'article'}
+      %p{:class => 'article_title'}=link_to result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
+      %p{:class => 'publish_date'}=result.date
+      %p{:class => 'article_abstract'}=result.abstract
+      -if current_user
+        -if current_user.saved?(result.id, current_user.id)
+          =link_to "Unsave Article", unsave_article_path(:user_id => current_user.id, :article_id => result.id, :article_title => result.title), class: "save-article-button"
+        -else
+          =link_to "Save Article", save_article_path(:user_id => current_user.id, :article_id => result.id, :article_title => result.title), class: "save-article-button"
+      %br
+      %br
 =paginate @current_results
-
 

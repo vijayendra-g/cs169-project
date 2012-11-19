@@ -1,0 +1,16 @@
+.content
+  = render :partial => 'google'
+  = render :partial => 'search_box'
+  %br
+  %br
+
+  -if @saved_articles.length == 0
+    %p{:align =>'center'} "No saved articles."
+  -@saved_articles.each do |result|
+    %div{:class => 'article'}
+      %p{:class => 'article_title'}=link_to result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
+    
+      %br
+      %br
+=paginate @saved_articles
+
