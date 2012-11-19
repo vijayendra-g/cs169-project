@@ -101,13 +101,13 @@ module PubmedHelper
         cont.failHash[:notEnglish] = oneXML.xpath('//Language')[0].to_s.split(tagr)[1] != 'eng'
         cont.rating += 5 if oneXML.xpath('//MeshHeadingList')[0].to_s.include?('Humans')
         cont.rating += case pubYear
-          when Time.now.year-5..Time.now.year then 5
+          when Time.now.year-5..Time.now.year then -3
           when Time.now.year-10..Time.now.year-6 then 3
           when Time.now.year-20..Time.now.year-11 then 1
           else 0
         end
         journalAbbrev = oneXML.xpath('//ISOAbbreviation')[0].to_s.split(tagr)[1]
-        cont.rating += 500*Journal.impact(journalAbbrev)
+        cont.rating += Journal.impact(journalAbbrev)
         ret << cont
       end
       return ret
