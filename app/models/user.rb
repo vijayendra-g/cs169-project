@@ -6,12 +6,12 @@ class User < ActiveRecord::Base
       return false
     end
     if User.find(user_id).saved_articles.exists?(:article_id => article_id, :user_id => user_id)
-	return true
+  return true
     else
-	return false
+  return false
     end
   end
-  
+
   def save_article(pubmed_article_id, article_title,user_id)
     logger.info("inside model save_article")
     if not (article = Article.find_by_pubmed_id(pubmed_article_id))
@@ -34,8 +34,11 @@ class User < ActiveRecord::Base
     return
   end
 
-  def get_saved_articles
-    return self.saved_articles
+  def get_saved_articles()
+    logger.info(user.id)
+    articles = current_user.find().saved_articles
+    logger.info(articles)
+    return articles
   end
 
   def self.from_omniauth(auth)

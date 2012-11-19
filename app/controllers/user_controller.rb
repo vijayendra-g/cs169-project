@@ -16,9 +16,10 @@ class UserController < ApplicationController
 
   def saved_articles
     @saved_articles = []
-    current_user.get_saved_articles().each do |article|
-      @saved_articles << Article.find(article.article_id)
-    end
+    articles = current_user.get_saved_articles()
+    logger.info(articles)
+#      @saved_articles << Article.find(article.article_id)
+ #   end
     render saved_articles
   end
 end
