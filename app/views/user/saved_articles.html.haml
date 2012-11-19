@@ -4,7 +4,7 @@
   %br
   %br
   %h2 Saved Articles
-  -if @saved_articles.length == 0
+  -if @saved_articles.nil? or @saved_articles.length == 0
     %p{:align =>'center'} "No saved articles."
   -@saved_articles.each do |result|
     %div{:class => 'article'}
