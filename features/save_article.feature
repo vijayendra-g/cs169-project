@@ -16,10 +16,3 @@ Scenario: save an article that I liked
   When I follow "0"
   Then I should see "headache"
 
-@omniauth_test
-Scenario: unsave article
-  When I follow "0"
-  When I fill in "_search_term" with "headache"
-  And I press "Search"
-  When I follow "0"
-  Then I should see "No saved articles."
