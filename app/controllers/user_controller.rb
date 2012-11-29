@@ -6,6 +6,7 @@ class UserController < ApplicationController
     logger.info(params[:article_id])
     current_user.save_article(params[:article_id], params[:article_title], params[:user_id])
     render :nothing => true
+
   end
 
   def unsave_article

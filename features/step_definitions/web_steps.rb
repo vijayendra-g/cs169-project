@@ -42,9 +42,208 @@ When /^(.*) within (.*[^:]):$/ do |step, parent, table_or_string|
 end
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
-  #FakeWeb.register_uri(:any, :any, :body => "WTF")
-  #PubmedController.should_receive(:request_Pubmed).and_return([3000, 4000, 5000, 22523416])
-  #PubmedController.should_receive(:parse_Articles).and_return()
+  FakeWeb.register_uri(:any, %r[http://eutils.ncbi.nlm.nih.gov*], 
+    :body => %Q(
+<PubmedArticle>
+    <MedlineCitation Owner="NLM" Status="MEDLINE">
+        <PMID Version="1">20129265</PMID>
+        <DateCreated>
+            <Year>2010</Year>
+            <Month>02</Month>
+            <Day>04</Day>
+        </DateCreated>
+        <DateCompleted>
+            <Year>2010</Year>
+            <Month>04</Month>
+            <Day>30</Day>
+        </DateCompleted>
+        <Article PubModel="Print">
+            <Journal>
+                <ISSN IssnType="Electronic">1558-349X</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>7</Volume>
+                    <Issue>1</Issue>
+                    <PubDate>
+                        <Year>2010</Year>
+                        <Month>Jan</Month>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Journal of the American College of Radiology : JACR</Title>
+                <ISOAbbreviation>J Am Coll Radiol</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Bullshit.</ArticleTitle>
+            <Pagination>
+                <MedlinePgn>13-5</MedlinePgn>
+            </Pagination>
+            <Affiliation>Indiana University School of Medicine, Department of Radiology, 702 Barnhill Drive, Room 1053, Indianapolis, IN 46202-5200, USA. rbgunder@iupui.edu</Affiliation>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Gunderman</LastName>
+                    <ForeName>Richard B</ForeName>
+                    <Initials>RB</Initials>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType>Journal Article</PublicationType>
+            </PublicationTypeList>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>United States</Country>
+            <MedlineTA>J Am Coll Radiol</MedlineTA>
+            <NlmUniqueID>101190326</NlmUniqueID>
+            <ISSNLinking>1546-1440</ISSNLinking>
+        </MedlineJournalInfo>
+        <CitationSubset>IM</CitationSubset>
+        <MeshHeadingList>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y">Communication</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y">Deception</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y">Trust</DescriptorName>
+            </MeshHeading>
+        </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+        <History>
+            <PubMedPubDate PubStatus="received">
+                <Year>2009</Year>
+                <Month>9</Month>
+                <Day>25</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="accepted">
+                <Year>2009</Year>
+                <Month>9</Month>
+                <Day>28</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="entrez">
+                <Year>2010</Year>
+                <Month>2</Month>
+                <Day>5</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="pubmed">
+                <Year>2010</Year>
+                <Month>2</Month>
+                <Day>5</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="medline">
+                <Year>2010</Year>
+                <Month>5</Month>
+                <Day>1</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+        </History>
+        <PublicationStatus>ppublish</PublicationStatus>
+        <ArticleIdList>
+            <ArticleId IdType="pii">S1546-1440(09)00484-0</ArticleId>
+            <ArticleId IdType="doi">10.1016/j.jacr.2009.09.026</ArticleId>
+            <ArticleId IdType="pubmed">20129265</ArticleId>
+        </ArticleIdList>
+    </PubmedData>
+</PubmedArticle>
+
+
+<PubmedArticle>
+    <MedlineCitation Owner="NLM" Status="MEDLINE">
+        <PMID Version="1">17076158</PMID>
+        <DateCreated>
+            <Year>2006</Year>
+            <Month>11</Month>
+            <Day>01</Day>
+        </DateCreated>
+        <DateCompleted>
+            <Year>2007</Year>
+            <Month>02</Month>
+            <Day>20</Day>
+        </DateCompleted>
+        <Article PubModel="Print">
+            <Journal>
+                <ISSN IssnType="Print">1660-9379</ISSN>
+                <JournalIssue CitedMedium="Print">
+                    <Volume>2</Volume>
+                    <Issue>81</Issue>
+                    <PubDate>
+                        <Year>2006</Year>
+                        <Month>Oct</Month>
+                        <Day>4</Day>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Revue medicale suisse</Title>
+                <ISOAbbreviation>Rev Med Suisse</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>[What talking means. Remarks on bullshit].</ArticleTitle>
+            <Pagination>
+                <MedlinePgn>2252-4</MedlinePgn>
+            </Pagination>
+            <Affiliation>Institut d'ethique biomedicale, CMU, 1211 Geneve 4.</Affiliation>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Mauron</LastName>
+                    <ForeName>A</ForeName>
+                    <Initials>A</Initials>
+                </Author>
+            </AuthorList>
+            <Language>fre</Language>
+            <PublicationTypeList>
+                <PublicationType>Journal Article</PublicationType>
+            </PublicationTypeList>
+            <VernacularTitle>Ce que parler veut dire. Propos sur le bullshit.</VernacularTitle>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>Switzerland</Country>
+            <MedlineTA>Rev Med Suisse</MedlineTA>
+            <NlmUniqueID>101219148</NlmUniqueID>
+            <ISSNLinking>1660-9379</ISSNLinking>
+        </MedlineJournalInfo>
+        <CitationSubset>IM</CitationSubset>
+        <MeshHeadingList>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y">Communication</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y">Philosophy</DescriptorName>
+            </MeshHeading>
+        </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+        <History>
+            <PubMedPubDate PubStatus="pubmed">
+                <Year>2006</Year>
+                <Month>11</Month>
+                <Day>2</Day>
+                <Hour>9</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="medline">
+                <Year>2007</Year>
+                <Month>2</Month>
+                <Day>21</Day>
+                <Hour>9</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="entrez">
+                <Year>2006</Year>
+                <Month>11</Month>
+                <Day>2</Day>
+                <Hour>9</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+        </History>
+        <PublicationStatus>ppublish</PublicationStatus>
+        <ArticleIdList>
+            <ArticleId IdType="pubmed">17076158</ArticleId>
+        </ArticleIdList>
+    </PubmedData>
+</PubmedArticle>
+))
   visit path_to(page_name)
 end
 
