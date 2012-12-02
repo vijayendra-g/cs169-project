@@ -9,7 +9,7 @@
   -@saved_articles.each do |result|
     %div{:class => 'article'}
       %p{:class => 'article_title'}=link_to result.title, "http://www.ncbi.nlm.nih.gov/pubmed/#{result.id.to_s}"
-      %p{:class=> "save-article-button delete-article", :article_id => result.id, :user_id => current_user.id, :id => "article#{result.id.to_s}"}='Delete Article'
+      %button{:class=> "delete-article", :article_id => result.id, :user_id => current_user.id, :id => "article#{result.id.to_s}"}='Delete Article'
 
       %br
       %br
