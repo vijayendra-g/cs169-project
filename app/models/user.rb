@@ -25,12 +25,20 @@ class User < ActiveRecord::Base
     return
   end
 
-  def unsave_article(pubmed_article_id, article_title, user_id)
+  def unsave_article(pubmed_article_id, user_id)
     logger.info("inside model unsave_article")
     article_id = Article.find_by_pubmed_id(pubmed_article_id)
     article = SavedArticle.where("article_id = ? AND user_id = ?", article_id, user_id)
     article[0].destroy
     logger.info("Unsaved article")
+    return
+  end
+
+  def delete_article(article_id,user_id)
+    logger.info("inside model delete_article")
+    article = SavedArticle.where("article_id = ? AND user_id = ?", article_id, user_id)
+    article[0].destroy
+    logger.info("Deleted article")
     return
   end
 
