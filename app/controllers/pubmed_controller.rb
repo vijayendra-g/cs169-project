@@ -22,9 +22,13 @@ class PubmedController < ApplicationController
 	return
     end
     connector = 'AND'
-    medical_field = "Anesthesia"
-    search_query = "(" + params[:search_term] + ") " + connector + " " + medical_field +"[MeSH Terms]"
-    
+    medical_field = nil
+    #medical_field = "Anesthesia"
+    if medical_field.nil?
+    	search_query = params[:search_term]
+    else
+	search_query = "(" + params[:search_term] + ") " + connector + " " + medical_field + "[MeSH Terms]"
+    end
     #puts "Search query is " + search_query
     search_results = requestPubmed(search_query)    
     @articleIDList = search_results.pmids

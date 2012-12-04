@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
       return false
     end
     if User.find(user_id).saved_articles.exists?(:article_id => article_id, :user_id => user_id)
-  return true
+      return true
     else
-  return false
+      return false
     end
   end
 
