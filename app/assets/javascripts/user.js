@@ -1,5 +1,5 @@
 $().ready(function() {
-    $(".delete-article").click(function(e) {
+    $(".delete-article").live(function(e) {
     e.preventDefault();
     if (confirm('Do you really want to delete this article?')) {
       var article_id = $(this).attr('article_id');
@@ -8,7 +8,7 @@ $().ready(function() {
       $.ajax({
         type: "POST",
         url: 'delete_article/',
-	data: {user_id: user_id, article_id: article_id},
+	data: {user_id: user_id, article_id: article_id, js: 1},
         success: function() {
 		    document.getElementById(id).parentNode.parentNode.removeChild(document.getElementById(id).parentNode);
             }
@@ -28,7 +28,7 @@ $().ready(function() {
       $.ajax({
         type: "POST",
         url: '/user/save_article/',
-	data: {user_id: user_id, article_title: article_title, article_id: article_id},
+	data: {user_id: user_id, article_title: article_title, article_id: article_id, js: 1},
         success: function() {
 		element.toggleClass('unsave-article save-article');
 		element.html('Unsave Article');
@@ -42,7 +42,7 @@ $().ready(function() {
       	$.ajax({
        	 type: "POST",
        	 url: '/user/unsave_article/',
-		data: {user_id: user_id, article_id: article_id},
+		data: {user_id: user_id, article_id: article_id, js: 1},
        	 success: function() {
             element.toggleClass('unsave-article save-article');
 	    element.html('Save Article');

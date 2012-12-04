@@ -15,9 +15,9 @@
       %p{:class => 'article_abstract'}='Abstract: ' + result.abstract
       -if current_user
         -if current_user.saved?(result.id, current_user.id)
-          =link_to "Unsave Article", delete_article2_path(:article_id => result.id, :user_id => current_user.id, :article_title => result.title), :class=> "unsave-article", :article_id => result.id, :user_id => current_user.id, :article_title => result.title, :id => "article#{result.id.to_s}"
+          =link_to "Unsave Article", unsave_article_path(:article_id => result.id, :user_id => current_user.id, :js => 0, :article_title => result.title), :class=> "unsave-article", :article_id => result.id, :user_id => current_user.id, :article_title => result.title, :id => "article#{result.id.to_s}"
         -else
-          =link_to "Save Article", save_article2_path(:article_id => result.id, :user_id => current_user.id), :class=> "save-article", :article_id => result.id, :user_id => current_user.id, :article_title => result.title, :id => "article#{result.id.to_s}"
+          =link_to "Save Article", save_article_path(:article_id => result.id, :user_id => current_user.id, :js => 0), :class=> "save-article", :article_id => result.id, :user_id => current_user.id, :article_title => result.title, :id => "article#{result.id.to_s}"
       %br
       %br
 =paginate @current_results
