@@ -39,7 +39,8 @@ module PubmedHelper
       articles.each do |p|
         count = 0
         @terms.each do |t|
-          if p.title.downcase.include?(t)
+          #throw p.title
+          if p.title.to_s.downcase.include?(t)
             count += 1
           end
         end
@@ -83,7 +84,6 @@ module PubmedHelper
         break if offset == articleNumArray.length
         cont = ArticleContainer.new
         oneXML = Nokogiri::XML(doc.xpath('//PubmedArticle')[offset].to_s)
-
         #store author
         oneXML.xpath('//Author').each do |a|
           if(a != nil && a != "")
