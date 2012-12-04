@@ -13,28 +13,26 @@ Background: existing settings
 
 @omniauth_test
 Scenario: save an article that I liked
-  When I follow "article1"
-  Then the text of "article1" should be "Unsave Article"
-  When I follow "Saved Articles"
-  Then I should see "article1"
+  When I "save" the article "Application of acupuncture as a headache management tool."
+  And I follow "Saved Articles"
+  Then I should see "Application of acupuncture as a headache management tool."
 
 @omniauth_test
-Scenario: unsave article
-  When I follow "article1"
+Scenario: unsave an article in result page
+  When I "save" the article "Application of acupuncture as a headache management tool."
   And I follow "Saved Articles"
-  Then I should see "article1"
+  Then I should see "Application of acupuncture as a headache management tool."
   When I fill in "_search_term" with "headache"
   And I press "Search"
-  Then the text of "article1" should be "Unsave Article"
-  When I follow "article1"
-  Then the text of "article1" should be "Save Article"
-  When I follow "Saved Articles"
-  Then I should see "No saved articles."
+  Then the text of the button of "Application of acupuncture as a headache management tool." should be "Unsave Article"
+  When I "unsave" the article "Application of acupuncture as a headache management tool."
+  And I follow "Saved Articles"
+  Then I should not see "Application of acupuncture as a headache management tool." 
 
 @omniauth_test
 Scenario: delete an article from saved articles
-  When I follow "article1"
+  When I "save" the article "Application of acupuncture as a headache management tool."
   And I follow "Saved Articles"
-  Then I should see "article1"
-  When I follow "article1"
+  Then I should see "Application of acupuncture as a headache management tool."
+  When I "delete" the article "Application of acupuncture as a headache management tool."
   Then I should see "No saved articles."
