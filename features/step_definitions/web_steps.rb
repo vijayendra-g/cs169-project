@@ -42,8 +42,8 @@ When /^(.*) within (.*[^:]):$/ do |step, parent, table_or_string|
 end
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
-  FakeWeb.register_uri(:any, %r[http://eutils.ncbi.nlm.nih.gov*], 
-    :body => %Q(
+  FakeWeb.register_uri(:any, %r[http://eutils.ncbi.nlm.nih.gov*xml], 
+    :body => %Q{
 <PubmedArticle>
     <MedlineCitation Owner="NLM" Status="MEDLINE">
         <PMID Version="1">20129265</PMID>
@@ -243,7 +243,8 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
         </ArticleIdList>
     </PubmedData>
 </PubmedArticle>
-))
+})
+
   visit path_to(page_name)
 end
 
