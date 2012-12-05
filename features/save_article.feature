@@ -6,6 +6,7 @@ Feature:
 
 Background: existing settings
   Given I am on the home page of "Drufus"
+  And I plan to search for headache
   When I follow "Sign in with Google"
   And Google authorizes me
   When I fill in "_search_term" with "headache"
