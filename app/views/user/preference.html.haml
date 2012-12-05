@@ -5,6 +5,10 @@
   %br
 
   %h2="Preference Page"
+  -if @saved_preference.empty?
+    %h3="You do not have saved preference"
+  -else
+    %h4="Your saved preference is:" + @saved_preference
   =form_tag '/user/add_preference', :method => :post do
     =label :preferences, :preferences, "Input your preference here: "
     =text_field '', :preference, :value => @saved_preference

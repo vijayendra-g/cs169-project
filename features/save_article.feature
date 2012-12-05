@@ -13,27 +13,27 @@ Background: existing settings
   And I press "Search"
 
 @omniauth_test
-Scenario: save an article that I liked
-  When I "save" the article "Application of acupuncture as a headache management tool."
+Scenario: save an article
+  When I follow "Save Article"
   And I follow "Saved Articles"
-  Then I should see "Application of acupuncture as a headache management tool."
+  Then I should see "Delete Article"
 
 @omniauth_test
-Scenario: unsave an article in result page
-  When I "save" the article "Application of acupuncture as a headache management tool."
+Scenario: delete the article I just saved from the saved article page
+  When I follow "Save Article"
   And I follow "Saved Articles"
-  Then I should see "Application of acupuncture as a headache management tool."
+  Then I should see "Delete Article"
+  When I follow "Delete Article"
+  Then I should not see "Delete Article"
+
+@omniauth_test
+Scenario: unsave the article I just saved from the result page
+  When I follow "Save Article"
+  And I follow "Saved Articles"
+  Then I should see "Delete Article"
   When I fill in "_search_term" with "headache"
   And I press "Search"
-  Then the text of the button of "Application of acupuncture as a headache management tool." should be "Unsave Article"
-  When I "unsave" the article "Application of acupuncture as a headache management tool."
+  Then I should see "Unsave Article"
+  When I follow "Unsave Article"
   And I follow "Saved Articles"
-  Then I should not see "Application of acupuncture as a headache management tool." 
-
-@omniauth_test
-Scenario: delete an article from saved articles
-  When I "save" the article "Application of acupuncture as a headache management tool."
-  And I follow "Saved Articles"
-  Then I should see "Application of acupuncture as a headache management tool."
-  When I "delete" the article "Application of acupuncture as a headache management tool."
-  Then I should see "No saved articles."
+  Then I should see "No saved articles"
