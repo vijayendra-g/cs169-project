@@ -5,7 +5,7 @@
   %br
 
   %h2="Preference Page"
-  -if @saved_preference.empty?
+  -if @saved_preference.nil? or @saved_preference.empty?
     %h3="You do not have saved preference"
   -else
     %h4="Your saved preference is:" + @saved_preference
