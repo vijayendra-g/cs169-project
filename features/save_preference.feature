@@ -5,7 +5,7 @@ Feature:
     I want to save my preferences in Drufus database
 
 Background:
-    Given that I am on the home page of "Drufus"
+    Given I am on the home page of "Drufus"
     When I follow "Sign in with Google"
     And Google authorizes me
 
