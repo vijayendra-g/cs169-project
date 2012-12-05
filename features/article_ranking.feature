@@ -13,5 +13,5 @@ Scenario: In general, more recent articles appear before less recent ones, and a
   Given I plan to search for electroconvulsive obesity
   When I fill in "_search_term" with "electroconvulsive obesity"
   And I press "Search"
-  Then I should see "2011" before "2002"
+  Then I should see "2011" before "2005"
   And I should see "Journal of clinical anesthesia" before "General hospital psychiatry"
