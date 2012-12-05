@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20121205040550) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "preferences"
     t.string   "preference"
   end
 

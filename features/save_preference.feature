@@ -10,11 +10,9 @@ Background:
     And Google authorizes me
 
 @omniauth_test
-Scenario:
-    Given I plan to search for headache
-    When I select "Add Filter"
-    Then I should see "Filter Options"
-    And I select "Anasthesia"
-    When I search "headache"
-    And I am on the home page of "Drufus"
-    Then I should see "Anasthesia selected"
+Scenario: Adding a Search Preference
+    When I follow "Search Preference"
+    Then I should see "Input your preference here:"
+    When I fill in "_preference" with "headache"
+    And press "Save Preference"
+    Then the "_preference" field should contain "headache"
