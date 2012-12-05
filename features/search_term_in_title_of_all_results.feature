@@ -13,6 +13,10 @@ Scenario: search for term (happy path)
   And I press "Search"
   Then I should see "electroconvulsive"
 
+Scenario: search for empty term (sad path)
+  When I press "Search"
+  Then I should see "Please input a search term"
+
 Scenario: search for term with no results (sad path)
   Given I plan to make a search that has no results
   When I fill in "_search_term" with "vknskdvndsnknvskdvnkndvk"
