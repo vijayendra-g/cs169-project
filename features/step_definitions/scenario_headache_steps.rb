@@ -1,3 +1,5 @@
+#Used for testing pagination and article saving.
+
 Given /^I plan to search for headache$/ do
   FakeWeb.register_uri(:any, %r[http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch*], 
     :body => %Q{
