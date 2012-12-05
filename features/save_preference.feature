@@ -11,6 +11,7 @@ Background:
 
 @omniauth_test
 Scenario:
+    Given I plan to search for headache
     When I select "Add Filter"
     Then I should see "Filter Options"
     And I select "Anasthesia"
