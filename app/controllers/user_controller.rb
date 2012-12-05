@@ -45,7 +45,14 @@ class UserController < ApplicationController
   end
 
   def preference
-    current_user.preferences += params[:preference]
+    @saved_preference = current_user.get_preference(current_user.id)
+		render 'preference'
   end
+
+  def add_preference
+    current_user.add_preference(current_user.id, params[:preference])
+    redirect_to preference_path
+  end
+
 end
 

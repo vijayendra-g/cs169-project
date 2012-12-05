@@ -23,13 +23,15 @@ class PubmedController < ApplicationController
     end
     connector = 'AND'
     medical_field = nil
-    #medical_field = "Anesthesia"
+    if not current_user.preference.nil?
+      medical_field = current_user.preference
+    end
     if medical_field.nil?
     	search_query = params[:search_term]
     else
-	search_query = "(" + params[:search_term] + ") " + connector + " " + medical_field + "[MeSH Terms]"
+	    search_query = "(" + params[:search_term] + ") " + connector + " " + medical_field + "[MeSH Terms]"
     end
-    #puts "Search query is " + search_query
+    puts "Search query is " + search_query
     search_results = requestPubmed(search_query)    
     @articleIDList = search_results.pmids
     @results = parseArticles(@articleIDList, params[:search_term])

@@ -5,9 +5,9 @@
   %br
 
   %h2="Preference Page"
-  =form_tag '/user/add_pref', :method => :get do
+  =form_tag '/user/add_preference', :method => :post do
     =label :preferences, :preferences, "Input your preference here: "
-    =text_field '', :preference
+    =text_field '', :preference, :value => @saved_preference
     %br
     %br
-    =submit_tag "Add Preference"
+    =submit_tag "Save Preference"

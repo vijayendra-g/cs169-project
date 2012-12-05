@@ -12,6 +12,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  def get_preference(user_id)
+		return User.find(user_id).preference
+  end
+
+
+  def add_preference(user_id, preference)
+		User.find(user_id).update_attributes(:preference => preference)
+  end
+
   def save_article(pubmed_article_id, article_title,user_id)
     logger.info("inside model save_article")
     if not (article = Article.find_by_pubmed_id(pubmed_article_id))
