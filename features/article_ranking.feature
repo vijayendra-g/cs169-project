@@ -1,3 +1,5 @@
+#Checks that for a known set of articles, Drufus accounts for certain criteria correctly. Naturally imperfect, but trends should be visible.
+
 Feature: search a medical term in Drufus
 
   As a doctor
@@ -7,7 +9,9 @@ Feature: search a medical term in Drufus
 Background: existing settings
   Given I am on the home page of "Drufus"
 
-Scenario: More relevant articles show before less relevant ones
-  When I fill in "_search_term" with "laryngospasm"
+Scenario: In general, more recent articles appear before less recent ones, and articles with higher journal impact factors appear before those with lower ones.
+  Given I plan to search for electroconvulsive obesity
+  When I fill in "_search_term" with "electroconvulsive obesity"
   And I press "Search"
-  Then I should see "Laryngospasm and hypoxia after intramuscular administration of ketamine to a patient in excited delirium." before "Sodium azide-associated laryngospasm after air bag deployment."
+  Then I should see "2011" before "2002"
+  And I should see "Journal of clinical anesthesia" before "General hospital psychiatry"
