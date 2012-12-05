@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
       return false
     end
     if User.find(user_id).saved_articles.exists?(:article_id => article_id, :user_id => user_id)
-  return true
+      return true
     else
-  return false
+      return false
     end
   end
 
@@ -31,16 +31,20 @@ class User < ActiveRecord::Base
     logger.info("inside model unsave_article")
     article_id = Article.find_by_pubmed_id(pubmed_article_id)
     article = SavedArticle.where("article_id = ? AND user_id = ?", article_id, user_id)
-    article[0].destroy
-    logger.info("Unsaved article")
+    if article.size > 0
+     	article[0].destroy
+    	logger.info("Unsaved article")
+    end
     return
   end
 
   def delete_article(article_id,user_id)
     logger.info("inside model delete_article")
     article = SavedArticle.where("article_id = ? AND user_id = ?", article_id, user_id)
-    article[0].destroy
-    logger.info("Deleted article")
+    if article.size > 0
+    	article[0].destroy
+	logger.info("Deleted article")
+    end
     return
   end
 
