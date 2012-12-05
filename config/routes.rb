@@ -18,7 +18,7 @@ Cs169Project::Application.routes.draw do
   match "/user/saved_articles" => "user#saved_articles", :as => :saved_articles
   match "/user/delete_article" => "user#delete_article", :as => :delete_article
 
-  match "/user/add_pref" => "user#add_pref"
+  match "/user/add_preference" => "user#add_preference", :via => :post
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

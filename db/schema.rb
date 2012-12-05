@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205035019) do
+ActiveRecord::Schema.define(:version => 20121205040550) do
 
   create_table "articles", :force => true do |t|
     t.integer  "pubmed_id"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20121205035019) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "preferences"
+    t.string   "preference"
   end
 
 end
