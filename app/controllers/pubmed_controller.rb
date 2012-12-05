@@ -23,8 +23,10 @@ class PubmedController < ApplicationController
     end
     connector = 'AND'
     medical_field = nil
-    if not current_user.preference.nil?
-      medical_field = current_user.preference
+    if current_user
+      if not current_user.preference.nil?
+        medical_field = current_user.preference
+      end
     end
     if medical_field.nil?
     	search_query = params[:search_term]
