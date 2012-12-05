@@ -45,7 +45,7 @@ class UserController < ApplicationController
   end
 
   def preference
-    render 'preference'
+    current_user.preferences += params[:preference]
   end
 end
 
