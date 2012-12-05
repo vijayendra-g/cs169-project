@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
   has_many :saved_articles
 
-  serialize :preferences
-
   def saved?(pubmed_article_id, user_id)
     if not (article_id = Article.find_by_pubmed_id(pubmed_article_id))
       return false
