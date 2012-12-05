@@ -28,7 +28,7 @@ class PubmedController < ApplicationController
         medical_field = current_user.preference
       end
     end
-    if medical_field.nil?
+    if medical_field.nil? or medical_field.empty?
     	search_query = params[:search_term]
     else
 	    search_query = "(" + params[:search_term] + ") " + connector + " " + medical_field + "[MeSH Terms]"
