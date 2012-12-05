@@ -5,6 +5,12 @@ end
 And /^Google doesn't authorize me$/ do
 end
 
+Then /^I should see "(.*?)" before "(.*?)"$/ do |arg1, arg2|
+  #puts "arg1 is " + arg1
+  assert page.body.include?(arg1)
+  assert page.body.include?(arg2)
+  assert page.body.index(arg1) < page.body.index(arg2)
+end
 
 When /^I "(.*?)" the article "(.*?)"$/ do |arg1, arg2|
   #link = page.find('a', :text => arg2)
